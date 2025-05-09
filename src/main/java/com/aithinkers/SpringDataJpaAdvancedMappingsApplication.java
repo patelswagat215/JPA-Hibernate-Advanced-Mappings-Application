@@ -19,25 +19,24 @@ public class SpringDataJpaAdvancedMappingsApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AppDao theAppDao) {
 		return runner -> {
-			 //createInstructor(theAppDao);
-			//findInstructor(theAppDao);
-			//deleteInstructor(theAppDao);
+			// createInstructor(theAppDao);
+			// findInstructor(theAppDao);
+			// deleteInstructor(theAppDao);
 			findInstructorDetail(theAppDao);
 		};
 
 	}
 
 	private void findInstructorDetail(AppDao theAppDao) {
-		
-		// get the instructor detail object
+
 		int theId = 1;
-		InstructorDetail tempInstructorDetail = theAppDao.findInstructorDetailById(theId);
-		// print the instructor detail
-		System.out.println("tempInstructorDetail: " + tempInstructorDetail);
-		// print the associated instructor
-		System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
+		InstructorDetail instructorDetail = theAppDao.findInstructorDetailById(theId);
+		//System.out.println("tempInstructorDetail: " + instructorDetail);
+		//System.out.println("the associated instructor: " + instructorDetail.getInstructor());
+		Instructor instructor = instructorDetail.getInstructor();
+		System.out.println("Associated Instructor: " + instructor.getFirstName() + " " + instructor.getLastName());
 		System.out.println("Done");
-		
+
 	}
 
 	private void deleteInstructor(AppDao theAppDao) {
@@ -51,19 +50,19 @@ public class SpringDataJpaAdvancedMappingsApplication {
 
 		int theId = 1;
 		System.out.println("Finding instructor id: " + theId);
-		Instructor tempInstructor = theAppDao.findInstructorById(theId);
-		System.out.println("tempInstructor: " + tempInstructor);
-		System.out.println("the associated instructorDetail only: " + tempInstructor.getInstructorsDetail());
+		Instructor instructor = theAppDao.findInstructorById(theId);
+		System.out.println("Instructor: " + instructor);
+		System.out.println("the associated instructorDetail only: " + instructor.getInstructorsDetail());
 
 	}
 
 	private void createInstructor(AppDao theAppDao) {
-		Instructor tempInstructor = new Instructor("Swagat", "Patel", "patelswagat215@gmail.com");
-		InstructorDetail tempInstructorDetail = new InstructorDetail("CodingWithPatel", "Java");
-		
-		tempInstructor.setInstructorsDetail(tempInstructorDetail);
-		System.out.println("Saving instructor: " + tempInstructor);
-		theAppDao.save(tempInstructor);
+		Instructor instructor = new Instructor("Swagat", "Patel", "patelswagat215@gmail.com");
+		InstructorDetail instructorDetail = new InstructorDetail("CodingWithPatel", "Java");
+
+		instructor.setInstructorsDetail(instructorDetail);
+		System.out.println("Saving instructor: " + instructor);
+		theAppDao.save(instructor);
 
 		System.out.println("Done!");
 	}

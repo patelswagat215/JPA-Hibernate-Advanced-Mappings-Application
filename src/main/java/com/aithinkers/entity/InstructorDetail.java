@@ -9,7 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @Entity
@@ -28,6 +30,7 @@ public class InstructorDetail {
 	@Column(name="hobby")
 	private String hobby;
 	
+	//Ont to one Uni & Bi-Directional
 	@OneToOne(mappedBy="instructorsDetail",cascade=CascadeType.ALL)
 	private Instructor instructor;
 	
