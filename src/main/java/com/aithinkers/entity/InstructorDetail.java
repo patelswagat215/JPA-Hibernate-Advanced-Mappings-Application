@@ -31,7 +31,8 @@ public class InstructorDetail {
 	private String hobby;
 	
 	//Ont to one Uni & Bi-Directional
-	@OneToOne(mappedBy="instructorsDetail",cascade=CascadeType.ALL)
+	@OneToOne(mappedBy="instructorsDetail",cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+	@ToString.Exclude
 	private Instructor instructor;
 	
 	public InstructorDetail(String youtubeChannel, String hobby) {
